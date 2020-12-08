@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as tf from '@tensorflow-models/qna';
-import {Answer, QuestionAndAnswer} from '@tensorflow-models/qna/dist/question_and_answer';
+import {Answer, ModelConfig, QuestionAndAnswer} from '@tensorflow-models/qna/dist/question_and_answer';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -60,8 +60,20 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    tf.load().then(x => {
+    const cfg: Config = new Config('assets/model/model.json');
+
+    tf.load(cfg).then(x => {
       this.model = x;
     });
+  }
+}
+
+class Config implements ModelConfig {
+  fromTFHub: boolean;
+  modelUrl: string;
+
+  constructor(modelUrl: string) {
+    this.modelUrl = modelUrl;
+    this.fromTFHub = false;
   }
 }

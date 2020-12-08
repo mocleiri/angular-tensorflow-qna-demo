@@ -1,20 +1,20 @@
 <form [formGroup]="formGroup">
   <div class="form-group">
     <label for="passage">Passage</label>
-    <textarea id="passage" class="form-control" formControlName="passage"></textarea>
+    <textarea id="passage" class="form-control"  rows="10" formControlName="passage"></textarea>
   </div>
 
   <div class="form-group">
     <label for="question">Question</label>
-    <textarea id="question" class="form-control" formControlName="question"></textarea>
+    <textarea id="question" class="form-control" rows="3" formControlName="question"></textarea>
   </div>
   <div *ngIf="model">
   <button class="btn btn-primary" (click)="classify()">Ask Question</button>
 
-    <div *ngIf="answers.length > 0">Found {{answers.length}} Answers</div>
-    <div *ngIf="answers.length == 0">Found Zero Answers</div>
+    <div *ngIf="answers && answers.length > 0">Found {{answers.length}} Answers</div>
+    <div *ngIf="answers && answers.length == 0">Found Zero Answers</div>
 
-    <table *ngIf="answers.length > 0">
+    <table *ngIf="answers && answers.length > 0">
       <tr>
         <th>Text</th>
         <th>Score</th>
